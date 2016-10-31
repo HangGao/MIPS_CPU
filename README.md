@@ -15,3 +15,4 @@ Control           | J, BEQ, BNE
 Special Purpose   | HLT(to stop fetching new instructions)
 
 ## Architecture
+![alt text](README_FILES/01.png "CPU Architecture")
