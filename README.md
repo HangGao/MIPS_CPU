@@ -13,6 +13,6 @@ Control           | J, BEQ, BNE
 Special Purpose   | HLT(to stop fetching new instructions)
 
 ## Architecture
-![alt text](README_FILES/01.png "CPU Architecture")
+The overall architecture is shown in the above figure, taken from the project description of CMSC 611 spring 2014. Generally speaking, it includes two major parts: Memory and CPU. Memory includes instruction cache (I-Cache), data cache (D-Cache) and main memory. D-Cache is a **2-way** set associative with a total of **four 4-words** blocks, associated with **least-recently-used-block-replacement strategy**; 
 
-The overall architecture is shown in the above figure, taken from the project description of CMSC 611 spring 2014. Generally speaking, it includes two major parts: Memory and CPU. Memory includes instruction cache (I-Cache), data cache (D-Cache) and main memory. 
+![alt text](README_FILES/01.png "CPU Architecture")
