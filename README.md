@@ -17,5 +17,6 @@ The overall architecture is shown in the below figure, taken from the project de
 
 ![alt text](README_FILES/01.png "CPU Architecture")
 
-Memory includes instruction cache (I-Cache), data cache (D-Cache) and main memory. D-Cache is a **2-way** set associative with a total of **four 4-words** blocks, associated with **least-recently-used-block-replacement strategy** and **write-allocate** policy for **write-back** strategy; 
+Memory includes **instruction cache (I-Cache)**, **data cache (D-Cache)** and **main memory**. D-Cache is a **2-way** set associative with a total of **four 4-words** blocks, associated with **least-recently-used-block-replacement strategy** and **write-allocate** policy for **write-back** strategy; I-Cache is **read-only** and used in the **instruction fetch stage** while D-Cache is accessed in **Memory stage**. Both I-Cache and D-Cache are connected to main memory using a shared bus. Any cache miss shall **wait** if main memory is busy serving the other cache and **I-Cache** takes priority if both caches try to access the memory at the same time. Main memory is accessable through **one-word-wise bus**. The access time for memory, I-Cache (hit time) and D-Cache (hit time) are specified in input configuration file, namely "config.txt". The main memory is **2-way interleaved**, thus the access time for 2 consecutive words equals **T+K** cycles, where **T** is the access time for main memory and **K** is the access of cache, both specified in "config.txt". Memory access is word-alignment enforced.
+
 
