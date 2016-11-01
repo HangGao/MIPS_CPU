@@ -13,7 +13,7 @@ Control           | J, BEQ, BNE
 Special Purpose   | HLT(to stop fetching new instructions)
 
 ## Architecture
-The overall architecture is shown in the below figure, taken from the project description of CMSC 611 spring 2014. Generally speaking, it includes two major parts: Memory and CPU. 
+The overall architecture is shown in the below figure, taken from the project description of CMSC 611 spring 2014 (so are the other figures). Generally speaking, it includes two major parts: Memory and CPU. 
 
 ![alt text](README_FILES/01.png "CPU Architecture")
 
