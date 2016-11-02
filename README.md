@@ -56,3 +56,55 @@ ADD.D, SUB.D, MUL.D, DIV.D  |   specified in "config.txt"
 * WAW hazzard is detected at ID stage and resovled by stalling the pipeline.
 * All chaches are blocking.
 * HLT marks the end of a program.
+
+# Interface
+There should be four input files: "inst.txt", "data.txt", "reg.txt" and "config.txt"
+
+**inst.txt**
+* The file shall contain a sequence of instructions specified in the instruction table above. 
+* The instructions shall be seperated by '\n', '\r' or '\r\n'
+* Operands of an instruction shall be separated by ','
+* Label for branch instructions shall precede any instruction, immediately followed by ':'
+
+Here is an example,
+~~~
+GG: L.D F1, 4(R4)
+L.D F2, 8(R5)
+ADD.D F4, F6, F2
+~~~
+
+**data.txt**
+* The file shall contain a variable number of 32-bit words, one per line. 
+
+Here is an example,
+~~~
+00000000000000000000000000000010
+00000000000000000010000101010101
+00000000001001110101010100010100
+~~~
+
+**reg.txt**
+* This file contains a sequence of 32-bit numbers to be assigned to integer registers, one per line, from R0 to R32. 
+
+Here is an example,
+~~~
+00000000001000000110011000000011
+00000000000000000000000000000011
+00000000000000000000000000000001
+~~~
+
+**config.txt**
+* This file should include:
+~~~
+FP adder:  <cycle count>, <pipelined: yes/no> 
+FP Multiplier:  < cycle count >, < pipelined: yes/no> 
+FP divider: < cycle count >, < pipelined: yes/no> 
+Main memory: <access time (number of cycles)> 
+I-Cache: <access time (number of cycles)> 
+D-Cache: <access time (number of cycles)>
+~~~
+
+# Usage
+~~~
+python2.7 application.py files/inst.txt files/data.txt files/reg.txt files/config.txt files/result.txt
+~~~
