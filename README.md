@@ -36,8 +36,7 @@ The instruction level parallelism is achieved with **in-order** instruction issu
 
 Instructions | Number of Cycles
 ------------------| ---------------------
-HLT, J    | 0 (does not enter EX stage)
-BEQ, BNE | 0 (same as above)
+HLT, J, BEQ, BNE     | 0 (does not enter EX stage)
 DADD, DADDI, DSUB, DSUBI, AND, ANDI, OR, ORI  | 2 (one for IU + one for MEM)
 LW, SW, L.D, S.D | 1 (for IU) + memory access time (D-Cache in MEM stage)
 ADD.D, SUB.D, MUL.D, DIV.D  |   specified in "config.txt"
