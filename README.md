@@ -106,5 +106,5 @@ D-Cache: <access time (number of cycles)>
 
 # Usage
 ~~~
-python2.7 application.py files/inst.txt files/data.txt files/reg.txt files/config.txt files/result.txt
+python2.7 application.py files/inst.txt files/data.txt files/reg.txt files/config.txt
 ~~~
