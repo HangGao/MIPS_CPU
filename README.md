@@ -24,4 +24,17 @@ Memory includes **instruction cache (I-Cache)**, **data cache (D-Cache)** and **
 
 Again the CPU pipeline is shown in the above figure, which is designed for dynamic schedule of instruction execution. It includes four stages: **nstruction Fetch (IF)**, **Instruction Decoding and Operand Reading (ID)**, **Execution (EX)** and **Write Back (WB)**. EX includes both **ALU** and data access **Mem** stages. There are four distinct ALU units: *Integer Arithmetic*, *FP Add/Substract*, *FP Multiplication* and *FP division*. Among them, **Integer Unit (IU)** always takes **one** cycle for execution, while **FP units** can be **piplined or not** and may take **different** cycles (latency), according the their specification in the "config.txt" file. For simplicity, FP division is **not pipelined** and needs **20** cycles to complete. Note that the number of cycles for the instruction fetch (IF) and data access (MEM) stages depends on the cache performance, e.g. miss or hit. For load and store instructions, the address is calculated by **IU** before the data cache is accessed. Meanwhile, integer instructions, e.g., DADD, that do not require memory access will still spend only **1** cycle in MEM stage, before advancing to WB stage.
 
-The instruction level parallelism is achieved with **in-order** instruction issue, **out-of-order** execution and **out-of-order** completion. 
+The instruction level parallelism is achieved with **in-order** instruction issue, **out-of-order** execution and **out-of-order** completion. They each follows a set of rules. 
+
+**in-order issue**:
+* All instructions shall pass IF stage in order.
+* IF stops fetching new instructions if any instruction cannot leave ID stage because its corresponding ALU is busy.
+
+**out-of-order execution** and **out-of-order completion**:
+* If instructions use different functional units after ID stage, they can get stalled or bypass each other in the EX stage, thus may leave EX and then WB out of order.
+
+**control unit**
+* Unconditional jump completes in ID stage and the fetched instruction will be flushed, i.e., "J" instruction will waste at least one cycle depending on whether there is a cache miss.
+* Conditional jumps are also resolved at ID stage. However, unlike unconditional jump, "not-taken" prediction will be made and IF will continue to fetch new instructions. If prediction is correct, no stall is needed for the pipeline; otherwise, fetched instruction will be flushed out and program counter will get updated. That is, one cycle will be wasted if the prediction is wrong.
+* All branching instructions do not stall for structural hazzard caused by the integer unit, but may suffer RAW hazzard. 
+  
