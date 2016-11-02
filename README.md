@@ -26,11 +26,11 @@ Again the CPU pipeline is shown in the above figure, which is designed for dynam
 
 The instruction level parallelism is achieved with **in-order** instruction issue, **out-of-order** execution and **out-of-order** completion. They each follows a set of rules. 
 
-**in-order issue**:
+**In-Order Issue**:
 * All instructions shall pass IF stage in order.
 * IF stops fetching new instructions if any instruction cannot leave ID stage because its corresponding ALU is busy.
 
-**out-of-order execution** and **out-of-order completion**:
+**Out-of-Order Execution** and **Out-of-Order Completion**:
 * If instructions use different functional units after ID stage, they can get stalled or bypass each other in the EX stage, thus may leave EX and then WB out of order.
 * The number of cycles for each instruction in EX stage is listed in the following table:
 
@@ -41,8 +41,9 @@ DADD, DADDI, DSUB, DSUBI, AND, ANDI, OR, ORI  | 2 (one for IU + one for MEM)
 LW, SW, L.D, S.D | 1 (for IU) + memory access time (D-Cache in MEM stage)
 ADD.D, SUB.D, MUL.D, DIV.D  |   specified in "config.txt"
 
-**control unit**
+**Control Unit**
 * Unconditional jump completes in ID stage and the fetched instruction will be flushed, i.e., "J" instruction will waste at least one cycle depending on whether there is a cache miss.
 * Conditional jumps are also resolved at ID stage. However, unlike unconditional jump, "not-taken" prediction will be made and IF will continue to fetch new instructions. If prediction is correct, no stall is needed for the pipeline; otherwise, fetched instruction will be flushed out and program counter will get updated. That is, one cycle will be wasted if the prediction is wrong.
 * All branching instructions do not stall for structural hazzard caused by the integer unit, but may suffer RAW hazzard. 
-  
+
+**Additional Facts to be Considered**
