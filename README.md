@@ -32,6 +32,15 @@ The instruction level parallelism is achieved with **in-order** instruction issu
 
 **out-of-order execution** and **out-of-order completion**:
 * If instructions use different functional units after ID stage, they can get stalled or bypass each other in the EX stage, thus may leave EX and then WB out of order.
+* The number of cycles for each instruction in EX stage is listed in the following table:
+
+Instructions | Number of Cycles
+------------------| ---------------------
+HLT, J    | 0 (does not enter EX stage)
+BEQ, BNE | 0 (same as above)
+DADD, DADDI, DSUB, DSUBI, AND, ANDI, OR, ORI  | 2 (one for IU + one for MEM)
+LW, SW, L.D, S.D | 1 (for IU) + memory access time (D-Cache in MEM stage)
+ADD.D, SUB.D, MUL.D, DIV.D  |   specified in "config.txt"
 
 **control unit**
 * Unconditional jump completes in ID stage and the fetched instruction will be flushed, i.e., "J" instruction will waste at least one cycle depending on whether there is a cache miss.
