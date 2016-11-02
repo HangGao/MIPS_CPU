@@ -47,3 +47,12 @@ ADD.D, SUB.D, MUL.D, DIV.D  |   specified in "config.txt"
 * All branching instructions do not stall for structural hazzard caused by the integer unit, but may suffer RAW hazzard. 
 
 **Additional Facts to be Considered**
+* No forwarding hardware exist
+* There are 32 word-size integer registers and 32 64-bits floating point registers
+* Instructions and data are stored in memory starting at 0x0 and 0x100 respectively. Word addresses are used when accessing memory.
+* Both unconditional and conditional jump can be forward or backward.
+* Integer and floating point operations use the same write port and hense structural hazzard can occur. The hazzard shall be detected before WB stage and if it occurs, instructions shall be stalled until WB is available. 
+* In case of two instructions are ready for WB at the same time while WB is available, priority is given to the function unit that is not pipelined and takes most execution cycles. 
+* WAW hazzard is detected at ID stage and resovled by stalling the pipeline.
+* All chaches are blocking.
+* HLT marks the end of a program.
